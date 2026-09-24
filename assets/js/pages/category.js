@@ -23,7 +23,7 @@
     const trail = (d.path || []).slice(0, -1).map((n) => ({ label: n.name, href: `/category/${n.slug}` }));
     const parent = (d.path || []).length > 1 ? d.path[d.path.length - 2] : null;
 
-    const stat = (icon, text) => `<span class="chip bg-white/10 text-white backdrop-blur">${I(icon, "h-3.5 w-3.5 text-[#ffb07a]")}${text}</span>`;
+    const stat = (icon, text) => `<span class="chip bg-white/10 text-white backdrop-blur">${I(icon, "h-3.5 w-3.5 text-[#ff5c6c]")}${text}</span>`;
     const header = AMK.ui.pageHeader({
       eyebrow: parent ? parent.name : "Product category",
       title: cat.name,

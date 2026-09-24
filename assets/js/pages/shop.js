@@ -59,12 +59,12 @@
         state.brands.length
           ? `<ul class="max-h-64 space-y-1 overflow-y-auto pr-1 text-[13.5px] text-ink-muted">${state.brands.map((b) => `
               <li><label class="flex cursor-pointer items-center gap-2.5 rounded-md px-2 py-1 hover:bg-canvas hover:text-ink">
-                <input type="checkbox" data-brand="${b.id}" ${state.selected.has(b.id) ? "checked" : ""} class="h-4 w-4 rounded accent-[#ff6a00]" />
+                <input type="checkbox" data-brand="${b.id}" ${state.selected.has(b.id) ? "checked" : ""} class="h-4 w-4 rounded accent-[#c8102e]" />
                 <span class="flex-1 truncate">${E(b.name)}</span></label></li>`).join("")}</ul>`
           : `<p class="text-sm text-ink-soft">No brands available.</p>`,
         state.selected.size ? `<button type="button" data-clear class="text-[12.5px] font-semibold text-accent hover:underline">Clear (${state.selected.size})</button>` : ""),
       box("Availability", "package-check", `<ul class="space-y-1 text-[13.5px] text-ink-muted">${["In stock", "Ships in 24 hrs", "Project lead time"].map((s) =>
-        `<li><label class="flex cursor-pointer items-center gap-2.5 rounded-md px-2 py-1 hover:bg-canvas"><input type="checkbox" class="h-4 w-4 rounded accent-[#ff6a00]" />${s}</label></li>`).join("")}</ul>`),
+        `<li><label class="flex cursor-pointer items-center gap-2.5 rounded-md px-2 py-1 hover:bg-canvas"><input type="checkbox" class="h-4 w-4 rounded accent-[#c8102e]" />${s}</label></li>`).join("")}</ul>`),
       `<div class="panel bg-accent-light p-4 !border-accent-soft">
         <p class="text-[14px] font-bold">Can't find your product?</p>
         <p class="mt-1 text-[13px] text-ink-muted">Tell us what you need — we trade thousands of items beyond the catalogue.</p>
@@ -129,7 +129,7 @@
     const selectedBrands = state.brands.filter((b) => state.selected.has(b.id));
     chips.classList.toggle("hidden", !selectedBrands.length);
     chips.classList.toggle("flex", !!selectedBrands.length);
-    chips.innerHTML = selectedBrands.map((b) => `<button type="button" data-unbrand="${b.id}" class="chip border border-accent-soft bg-accent-light text-[#b54700] hover:border-accent">${E(b.name)} ${I("x", "h-3 w-3")}</button>`).join("")
+    chips.innerHTML = selectedBrands.map((b) => `<button type="button" data-unbrand="${b.id}" class="chip border border-accent-soft bg-accent-light text-[#a50d25] hover:border-accent">${E(b.name)} ${I("x", "h-3 w-3")}</button>`).join("")
       + (selectedBrands.length ? `<button type="button" data-clear class="text-[13px] font-semibold text-accent hover:underline">Clear all</button>` : "");
 
     document.getElementById("shop-grid").innerHTML = total

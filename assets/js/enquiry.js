@@ -128,7 +128,7 @@
 
     const renderChips = () => {
       chips.innerHTML = value.map((v, i) => `
-        <span class="inline-flex items-center gap-1 rounded-full bg-accent-light px-2.5 py-1 text-[12.5px] font-semibold text-[#b54700]">
+        <span class="inline-flex items-center gap-1 rounded-full bg-accent-light px-2.5 py-1 text-[12.5px] font-semibold text-[#a50d25]">
           ${E(v)}<button type="button" data-rm="${i}" aria-label="Remove ${E(v)}" class="opacity-70 hover:opacity-100">${I("x", "h-3 w-3")}</button>
         </span>`).join("");
       container.dispatchEvent(new CustomEvent("change-brands", { detail: value }));
@@ -214,7 +214,7 @@
         return wrap(`<input ${attr} type="date" value="${E(def)}" class="input" />`);
       case "boolean":
         if (f.render_as === "checkbox") {
-          return `<label class="flex cursor-pointer items-start gap-3"><input ${attr} type="checkbox" ${def === "true" ? "checked" : ""} class="mt-1 h-4 w-4 accent-[#ff6a00]" />
+          return `<label class="flex cursor-pointer items-start gap-3"><input ${attr} type="checkbox" ${def === "true" ? "checked" : ""} class="mt-1 h-4 w-4 accent-[#c8102e]" />
             <span class="text-[15px] font-semibold text-navy">${E(f.name)}${item.is_required ? `<span class="req"> *</span>` : ""}</span></label>`;
         }
         return `<div><span class="field-label"><span>${E(label)}${item.is_required ? `<span class="req"> *</span>` : ""}</span></span>

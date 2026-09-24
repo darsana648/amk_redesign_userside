@@ -62,8 +62,17 @@ tools/snapshot.py            refreshes snapshot.js from the live API
   before `config.js` loads.
 - **Contacts and segments**: these are in `AMK.SITE` and `AMK.SEGMENTS` in the same file.
 - **Colours and fonts**: these are in `assets/js/tailwind-config.js` and `assets/css/styles.css`.
-  The palette is AMK navy `#0b2b5c`, action orange `#ff6a00` for every call to action, and
-  trust green `#0a8f5b`, with white cards on a light grey `#f4f5f7` background. All text uses Inter.
+  The "dark navy & red" palette is very dark navy `#0a1530` for the header bars, carousel and
+  footer, crimson `#c8102e` (with white text) for every button, badge and accent, a brighter red
+  `#ff5c6c` for highlights on dark backgrounds, royal blue `#2a4f9a` for links and forest green
+  `#1f7a52`, with white cards on a cool neutral `#f4f6fa` background. The red matches the AMK
+  logo. All text uses Inter.
+  Earlier palettes, in case you want one back: "navy & brass" (navy `#0b2b5c`, brass `#8c6a2f`,
+  champagne `#e3c58f`, ivory `#f5f3ee`), "burgundy & charcoal" (charcoal `#1c1f26`,
+  burgundy `#7b1e2c`, old gold `#d8b27a`, teal `#245c63`, cream `#f6f4f1`), "emerald & gold"
+  (emerald `#0e3a2f`, gold `#9a7430`, champagne `#d9b66f`, off-white `#f7f5f0`) and
+  "midnight & apricot" (midnight `#161e31`, apricot `#f8b179` with navy text, deep apricot
+  `#a8531f`, neutral `#f6f5f2`).
 
 ### CORS and the offline snapshot
 

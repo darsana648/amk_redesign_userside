@@ -146,7 +146,7 @@
           <span class="chip bg-accent text-white">${I(badgeIcon, "h-3.5 w-3.5")} ${E(badge)}</span>
           <h1 class="mt-4 max-w-3xl text-[30px] font-extrabold leading-[1.12] tracking-tight text-white md:text-[42px]">${title}</h1>
           <p class="mt-4 max-w-2xl text-[16px] leading-relaxed text-white/80">${E(intro)}</p>
-          ${lastUpdated ? `<p class="mt-5 inline-flex items-center gap-1.5 text-[13px] text-white/70">${I("calendar", "h-4 w-4 text-[#ffb07a]")} Last updated: ${E(lastUpdated)}</p>` : ""}
+          ${lastUpdated ? `<p class="mt-5 inline-flex items-center gap-1.5 text-[13px] text-white/70">${I("calendar", "h-4 w-4 text-[#ff5c6c]")} Last updated: ${E(lastUpdated)}</p>` : ""}
         </div>
       </div>
     </section>`;
@@ -230,7 +230,7 @@
 
     document.currentScript.insertAdjacentHTML("afterend", `
       ${hero({ breadcrumb: "FAQs", badge: "Frequently asked", badgeIcon: "circle-help",
-        title: `Everything you need to know <span class="text-[#ffb07a]">before you raise a PO.</span>`,
+        title: `Everything you need to know <span class="text-[#ff5c6c]">before you raise a PO.</span>`,
         intro: "Ordering, pricing, warranty, lead times and multi-segment project delivery — clearly answered." })}
       <section class="container-site pt-5">
         <div class="grid gap-5 lg:grid-cols-[280px_1fr]">

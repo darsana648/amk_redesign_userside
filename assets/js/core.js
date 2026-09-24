@@ -414,7 +414,7 @@
           </span>
           ${AMK.ui.rating(p.rating.value, p.rating.count)}
         </div>
-        <button type="button" data-enquire="${E(p.slug)}" class="btn btn-outline-accent btn-sm mt-1.5 w-full group-hover:!bg-accent group-hover:!text-white">
+        <button type="button" data-enquire="${E(p.slug)}" class="btn btn-outline-accent btn-sm mt-1.5 w-full group-hover:!border-accent group-hover:!bg-accent group-hover:!text-white">
           Request Quote
         </button>
       </div>

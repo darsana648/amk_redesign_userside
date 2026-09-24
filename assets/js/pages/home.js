@@ -85,14 +85,14 @@
     root.innerHTML = `
       ${slides.map((s, i) => `<img src="${E(AMK.img(s.image, 1600))}" alt="" aria-hidden="true" ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}
           data-slide-img="${i}" class="hero-img absolute inset-0 h-full w-full object-cover" />`).join("")}
-      <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,22,49,.94)_0%,rgba(6,22,49,.82)_38%,rgba(11,43,92,.35)_72%,rgba(11,43,92,.05)_100%)]"></div>
-      <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#061631]/85 to-transparent"></div>
+      <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,13,31,.94)_0%,rgba(6,13,31,.82)_38%,rgba(10,21,48,.35)_72%,rgba(10,21,48,.05)_100%)]"></div>
+      <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#060d1f]/85 to-transparent"></div>
 
       ${n > 1 ? `
       <div class="absolute right-4 top-4 z-10 flex items-center gap-1 sm:right-6 sm:top-6">
         <span class="mr-2 font-mono text-[13px] text-white/80"><b data-count class="text-white">01</b> / ${pad(n - 1)}</span>
-        <button type="button" data-go="-1" aria-label="Previous slide" class="grid h-9 w-9 place-items-center border border-white/30 bg-white/5 text-white backdrop-blur transition hover:border-accent hover:bg-accent">${I("chevron-left", "h-4 w-4")}</button>
-        <button type="button" data-go="1" aria-label="Next slide" class="grid h-9 w-9 place-items-center border border-white/30 bg-white/5 text-white backdrop-blur transition hover:border-accent hover:bg-accent">${I("chevron-right", "h-4 w-4")}</button>
+        <button type="button" data-go="-1" aria-label="Previous slide" class="grid h-9 w-9 place-items-center border border-white/30 bg-white/5 text-white backdrop-blur transition hover:border-accent hover:bg-accent hover:text-white">${I("chevron-left", "h-4 w-4")}</button>
+        <button type="button" data-go="1" aria-label="Next slide" class="grid h-9 w-9 place-items-center border border-white/30 bg-white/5 text-white backdrop-blur transition hover:border-accent hover:bg-accent hover:text-white">${I("chevron-right", "h-4 w-4")}</button>
       </div>` : ""}
 
       <div class="relative flex flex-1 flex-col">
@@ -115,7 +115,7 @@
     const paint = () => {
       const s = slides[index];
       copy.innerHTML = `<div class="fade-up">
-        <p class="flex items-center gap-3 text-[12px] font-bold uppercase tracking-[0.14em] text-[#ffb07a]">
+        <p class="flex items-center gap-3 text-[12px] font-bold uppercase tracking-[0.14em] text-[#ff5c6c]">
           <span class="h-[2px] w-8 bg-accent"></span>${E(s.eyebrow || "AMK Industrial Trading")}
         </p>
         <h1 class="mt-3 line-clamp-3 text-[26px] font-extrabold leading-[1.12] tracking-tight text-white sm:text-[36px] lg:text-[40px]">${E(s.title)}</h1>
@@ -176,12 +176,12 @@
     document.getElementById("hero-cards").innerHTML = cards.map((c) => `
       <a href="${AMK.url(c.link || "/shop")}" class="group relative flex min-h-[150px] overflow-hidden rounded-2xl bg-navy text-white">
         ${c.image ? `<img src="${E(AMK.img(c.image, 600))}" alt="" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />` : ""}
-        <div class="absolute inset-0 bg-gradient-to-t from-[#061631]/90 via-[#061631]/45 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#060d1f]/90 via-[#060d1f]/45 to-transparent"></div>
         <div class="relative mt-auto p-4">
-          ${c.eyebrow ? `<p class="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#ffb07a]">${E(c.eyebrow)}</p>` : ""}
+          ${c.eyebrow ? `<p class="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#ff5c6c]">${E(c.eyebrow)}</p>` : ""}
           <h3 class="text-[17px] font-bold leading-tight text-white">${E(c.title)}</h3>
           ${c.subtitle ? `<p class="mt-0.5 line-clamp-2 text-[12.5px] text-white/80">${E(c.subtitle)}</p>` : ""}
-          <span class="mt-2 inline-flex items-center gap-1 text-[12.5px] font-semibold text-white group-hover:text-[#ffb07a]">${E(c.cta_label || "Shop Now")} ${I("arrow-right", "h-3.5 w-3.5")}</span>
+          <span class="mt-2 inline-flex items-center gap-1 text-[12.5px] font-semibold text-white group-hover:text-[#ff5c6c]">${E(c.cta_label || "Shop Now")} ${I("arrow-right", "h-3.5 w-3.5")}</span>
         </div>
       </a>`).join("");
   }
@@ -195,7 +195,7 @@
     return `<section class="container-site pt-8">
       <a href="${href}" class="group relative block aspect-[3/2] overflow-hidden rounded-2xl bg-navy sm:aspect-[21/9] lg:aspect-[24/7]">
         ${s.banner_image ? `<img src="${E(AMK.img(s.banner_image, 1600))}" alt="${E(s.title)}" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />` : ""}
-        <div class="absolute inset-0 bg-gradient-to-r from-[#061631]/90 via-[#0b2b5c]/55 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-[#060d1f]/90 via-[#0a1530]/55 to-transparent"></div>
         <div class="relative flex h-full max-w-xl flex-col justify-center gap-2 p-6 text-white md:p-12">
           ${s.eyebrow ? `<span class="chip w-fit bg-white/15 text-white backdrop-blur">${E(s.eyebrow)}</span>` : ""}
           ${s.title ? `<h2 class="text-2xl font-extrabold tracking-tight text-white md:text-4xl">${E(s.title)}</h2>` : ""}
@@ -223,9 +223,9 @@
   document.getElementById("home-segments").innerHTML = AMK.SEGMENTS.map((s) => `
     <a href="${AMK.url(`/segment/${s.slug}`)}" class="group relative flex aspect-[4/5] flex-col overflow-hidden rounded-xl bg-navy">
       <img src="${E(AMK.img(s.image, 400))}" alt="" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />
-      <div class="absolute inset-0 bg-gradient-to-t from-[#061631]/95 via-[#061631]/40 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-[#060d1f]/95 via-[#060d1f]/40 to-transparent"></div>
       <div class="relative mt-auto p-3.5">
-        <span class="mb-2 grid h-8 w-8 place-items-center rounded-lg bg-white/15 text-white backdrop-blur group-hover:bg-accent">${I(s.icon, "h-4 w-4")}</span>
+        <span class="mb-2 grid h-8 w-8 place-items-center rounded-lg bg-white/15 text-white backdrop-blur group-hover:bg-accent group-hover:text-white">${I(s.icon, "h-4 w-4")}</span>
         <h3 class="text-[15px] font-bold leading-tight text-white">${E(s.name)}</h3>
         <p class="mt-0.5 line-clamp-2 text-[12px] text-white/75">${E(s.tagline)}</p>
       </div>

@@ -40,7 +40,7 @@
         <div class="relative px-6 py-12 md:px-12 md:py-16">
           <span class="chip bg-accent text-white"><i data-lucide="building-2" class="h-3.5 w-3.5"></i> About AMK</span>
           <h1 class="mt-5 max-w-3xl text-[32px] font-extrabold leading-[1.1] tracking-tight text-white md:text-[46px]">
-            Procurement infrastructure for <span class="text-[#ffb07a]">serious operators.</span>
+            Procurement infrastructure for <span class="text-[#ff5c6c]">serious operators.</span>
           </h1>
           <p class="mt-5 max-w-2xl text-[16px] leading-relaxed text-white/80">
             AMK Industrial Trading is a B2B industrial trading and smart-solutions company. We source, stock and supply hardware across six business segments — selling directly to clients, not through resellers. From a single drive on a shop floor to a multi-MW solar plant or a smart-factory rollout, we are your single point of contact across the full industrial lifecycle.
@@ -125,10 +125,10 @@
           </div>
         </div>
         <ul class="relative grid grid-cols-2 gap-3">
-          <li class="flex items-center gap-3 rounded-xl bg-white/10 p-4 text-[14px] font-semibold backdrop-blur"><i data-lucide="users" class="h-5 w-5 text-[#ffb07a]"></i>Sales engineers</li>
-          <li class="flex items-center gap-3 rounded-xl bg-white/10 p-4 text-[14px] font-semibold backdrop-blur"><i data-lucide="wrench" class="h-5 w-5 text-[#ffb07a]"></i>Automation specialists</li>
-          <li class="flex items-center gap-3 rounded-xl bg-white/10 p-4 text-[14px] font-semibold backdrop-blur"><i data-lucide="globe" class="h-5 w-5 text-[#ffb07a]"></i>Solar project leads</li>
-          <li class="flex items-center gap-3 rounded-xl bg-white/10 p-4 text-[14px] font-semibold backdrop-blur"><i data-lucide="award" class="h-5 w-5 text-[#ffb07a]"></i>IIoT consultants</li>
+          <li class="flex items-center gap-3 rounded-xl bg-white/10 p-4 text-[14px] font-semibold backdrop-blur"><i data-lucide="users" class="h-5 w-5 text-[#ff5c6c]"></i>Sales engineers</li>
+          <li class="flex items-center gap-3 rounded-xl bg-white/10 p-4 text-[14px] font-semibold backdrop-blur"><i data-lucide="wrench" class="h-5 w-5 text-[#ff5c6c]"></i>Automation specialists</li>
+          <li class="flex items-center gap-3 rounded-xl bg-white/10 p-4 text-[14px] font-semibold backdrop-blur"><i data-lucide="globe" class="h-5 w-5 text-[#ff5c6c]"></i>Solar project leads</li>
+          <li class="flex items-center gap-3 rounded-xl bg-white/10 p-4 text-[14px] font-semibold backdrop-blur"><i data-lucide="award" class="h-5 w-5 text-[#ff5c6c]"></i>IIoT consultants</li>
         </ul>
       </div>
     </section>
@@ -150,7 +150,7 @@
       </li>`).join("");
     document.getElementById("about-segments").innerHTML = AMK.SEGMENTS.map((s) => `
       <a href="segment.html?slug=${s.slug}" class="card card-hover group flex items-start gap-4 p-5">
-        <span class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-navy text-white group-hover:bg-accent">${AMK.i(s.icon, "h-5 w-5")}</span>
+        <span class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-navy text-white group-hover:bg-accent group-hover:text-white">${AMK.i(s.icon, "h-5 w-5")}</span>
         <span class="min-w-0">
           <span class="block text-[15.5px] font-bold group-hover:text-accent">${AMK.esc(s.short)}</span>
           <span class="mt-1 block text-[13.5px] leading-relaxed text-ink-muted">${AMK.esc(s.tagline)}</span>
