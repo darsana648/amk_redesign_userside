@@ -1,0 +1,224 @@
+@import "tailwindcss";
+
+/* Scan every page + script for class names (JS renders most chrome). */
+@source "../*.html";
+@source "../assets/js/**/*.js";
+
+/* =========================================================================
+   AMK — classic theme
+   Deep navy + antique gold on warm ivory, serif display type, square-ish
+   corners and hairline rules. Every colour is a token so a single edit
+   re-skins the whole site.
+   ========================================================================= */
+@theme {
+  /* Brand */
+  --color-brand: #1d4f91;          /* links, focus, secondary actions */
+  --color-brand-dark: #163d72;
+  --color-brand-navy: #0b2b5c;     /* primary surfaces + headings */
+  --color-brand-deep: #071d40;     /* footer / darkest band */
+  --color-brand-gold: #b08a3e;     /* classic accent: rules, highlights */
+  --color-brand-gold-dark: #8f6f2e;
+  --color-brand-gold-soft: #f5eedf;
+  --color-brand-green: #1f7a4d;    /* in-stock / success */
+
+  /* Neutrals (warm) */
+  --color-ink: #1b2436;
+  --color-ink-muted: #4a5468;
+  --color-ink-soft: #6b7385;
+  --color-line: #e6e0d4;
+  --color-line-strong: #d3cab9;
+  --color-paper: #ffffff;
+  --color-ivory: #faf8f3;
+  --color-parchment: #f3efe6;
+
+  /* Type */
+  --font-sans: "Source Sans 3", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --font-serif: "Libre Baskerville", Georgia, "Times New Roman", serif;
+
+  /* Radii — deliberately restrained */
+  --radius-xs: 2px;
+  --radius-sm: 3px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+
+  /* Shadows */
+  --shadow-card: 0 1px 2px rgba(11, 43, 92, 0.05), 0 6px 18px -10px rgba(11, 43, 92, 0.18);
+  --shadow-elev: 0 2px 6px rgba(11, 43, 92, 0.06), 0 22px 44px -22px rgba(11, 43, 92, 0.35);
+
+  --animate-rise: rise 0.5s ease-out both;
+  --animate-marquee: marquee 45s linear infinite;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes fab-wiggle {
+  0%, 92%, 100% { transform: rotate(0deg); }
+  94% { transform: rotate(-12deg); }
+  96% { transform: rotate(10deg); }
+  98% { transform: rotate(-6deg); }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    @apply font-serif text-brand-navy;
+    letter-spacing: -0.005em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand-gold);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: var(--color-brand-gold-soft);
+    color: var(--color-brand-navy);
+  }
+  [x-cloak], [hidden] { display: none !important; }
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+@layer components {
+  /* Page container — matches the original 1320px frame */
+  .container-x {
+    @apply mx-auto w-full max-w-[1320px] px-4 md:px-6 lg:px-8;
+  }
+
+  /* Small caps label above headings */
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-gold;
+  }
+  .eyebrow-rule {
+    @apply inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-gold;
+  }
+  .eyebrow-rule::before {
+    content: "";
+    @apply h-px w-8 bg-brand-gold;
+  }
+
+  /* Section title with a short gold underline */
+  .section-title {
+    @apply font-serif text-2xl font-bold leading-tight text-brand-navy md:text-[1.9rem];
+  }
+  .title-rule {
+    @apply mt-3 block h-[2px] w-14 bg-brand-gold;
+  }
+  .display {
+    @apply font-serif font-bold leading-[1.12] text-brand-navy;
+    font-size: clamp(1.9rem, 1.2rem + 2.6vw, 3.25rem);
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm px-5 text-[13px] font-semibold uppercase tracking-[0.12em] transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-60;
+    min-height: 2.75rem;
+  }
+  .btn-sm { @apply px-3.5 text-[11.5px]; min-height: 2.25rem; }
+  .btn-lg { @apply px-7 text-sm; min-height: 3.125rem; }
+  .btn-primary { @apply bg-brand-navy text-white hover:bg-brand-deep; }
+  .btn-gold { @apply bg-brand-gold text-white hover:bg-brand-gold-dark; }
+  .btn-outline { @apply border border-brand-navy bg-white text-brand-navy hover:bg-brand-navy hover:text-white; }
+  .btn-outline-light { @apply border border-white/60 text-white hover:bg-white hover:text-brand-navy; }
+  .btn-light { @apply bg-white text-brand-navy hover:bg-brand-gold-soft; }
+  .btn-whatsapp { @apply border border-brand-green bg-white text-brand-green hover:bg-brand-green hover:text-white; }
+
+  .link-arrow {
+    @apply inline-flex items-center gap-1.5 text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-navy transition-colors hover:text-brand-gold;
+  }
+
+  /* Cards */
+  .card {
+    @apply rounded-sm border border-line bg-white;
+  }
+  .card-hover {
+    @apply transition duration-300 hover:border-brand-gold/60 hover:shadow-card;
+  }
+
+  /* Forms */
+  .field-label {
+    @apply flex items-center justify-between text-[11.5px] font-semibold uppercase tracking-[0.12em] text-ink-muted;
+  }
+  .field-hint { @apply text-xs font-medium normal-case tracking-normal text-ink-soft; }
+  .input {
+    @apply h-11 w-full rounded-sm border border-line-strong bg-white px-3.5 text-sm text-ink outline-none transition placeholder:text-ink-soft/70 focus:border-brand-navy focus:ring-2 focus:ring-brand-navy/10;
+  }
+  .textarea {
+    @apply w-full resize-none rounded-sm border border-line-strong bg-white p-3.5 text-sm text-ink outline-none transition placeholder:text-ink-soft/70 focus:border-brand-navy focus:ring-2 focus:ring-brand-navy/10;
+  }
+  .fieldset {
+    @apply rounded-sm border border-line bg-ivory p-4;
+  }
+  .legend {
+    @apply bg-white px-2 text-[10.5px] font-semibold uppercase tracking-[0.18em] text-brand-gold ring-1 ring-line;
+  }
+  .radio-card {
+    @apply relative flex cursor-pointer items-center justify-center gap-2 rounded-sm border border-line-strong bg-white px-4 py-3 text-sm font-medium text-brand-navy transition hover:border-brand-navy has-[:checked]:border-brand-navy has-[:checked]:bg-brand-navy/[0.04];
+  }
+
+  /* Badges */
+  .badge {
+    @apply inline-flex items-center rounded-xs px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.12em];
+  }
+  .badge-hot { @apply bg-[#9b2c2c] text-white; }
+  .badge-new { @apply bg-brand-gold text-white; }
+  .chip-brand {
+    @apply inline-flex items-center rounded-xs border border-line bg-ivory px-1.5 py-0.5 text-[11px] font-semibold text-brand-navy;
+  }
+
+  /* Long-form copy (legal pages, descriptions) */
+  .prose-classic {
+    @apply text-[15.5px] leading-relaxed text-ink-muted;
+  }
+  .prose-classic h2 { @apply mt-10 mb-3 font-serif text-xl font-bold text-brand-navy; }
+  .prose-classic h3 { @apply mt-6 mb-2 font-serif text-lg font-bold text-brand-navy; }
+  .prose-classic p { @apply mb-4; }
+  .prose-classic ul { @apply mb-4 list-disc space-y-1.5 pl-5 marker:text-brand-gold; }
+  .prose-classic ol { @apply mb-4 list-decimal space-y-1.5 pl-5 marker:text-brand-gold; }
+  .prose-classic a { @apply font-semibold text-brand underline decoration-brand-gold/50 underline-offset-2 hover:text-brand-navy; }
+  .prose-classic strong { @apply text-ink; }
+
+  /* Subtle blueprint texture for dark bands */
+  .bg-blueprint {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  .bg-linen {
+    background-image:
+      linear-gradient(to right, rgba(11, 43, 92, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(11, 43, 92, 0.035) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .fab-wiggle { animation: fab-wiggle 6s ease-in-out infinite; transform-origin: center; }
+  .marquee-pause:hover { animation-play-state: paused; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AMK Industrial Trading · One vendor for every industrial brand</title>
+  <meta name="description" content="Switchgear, automation, panel materials, solar, batteries and smart solutions — sourced direct from Schneider, ABB, Siemens, L&amp;T, Havells and 30+ authorised brands." />
+  <link rel="icon" type="image/png" href="assets/img/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="preconnect" href="https://api.amktrading.com" />
+  <link rel="dns-prefetch" href="https://amk-trading-media.s3.ap-south-1.amazonaws.com" />
+
+  <!-- Tailwind CSS (Play CDN) + shared theme tokens -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="assets/js/tailwind-config.js"></script>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <!-- Icons -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+
+  <!-- Site scripts (order matters) -->
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/enquiry.js"></script>
+</head>
+<body class="flex min-h-screen flex-col">
+  <script>AMK.renderTop()</script>
+
+  <main id="main" class="flex-1">
+    <!-- ================= Hero band: categories + carousel + welcome / promo cards ================= -->
+    <section class="pt-4">
+      <div class="container-site">
+        <div class="grid gap-4 lg:grid-cols-[250px_minmax(0,1fr)] xl:grid-cols-[250px_minmax(0,1fr)_280px]">
+          <!-- Top categories -->
+          <aside class="panel hidden overflow-hidden lg:block">
+            <p class="flex items-center gap-2 border-b border-line px-4 py-3 text-[14px] font-bold text-ink">
+              <i data-lucide="layout-grid" class="h-4 w-4 text-accent"></i> Top Categories
+            </p>
+            <ul id="home-top-cats" class="py-1"></ul>
+            <a href="segments.html" class="flex items-center justify-center gap-1 border-t border-line py-2.5 text-[13px] font-semibold text-accent hover:bg-accent-light">
+              View All Categories <i data-lucide="chevron-right" class="h-4 w-4"></i>
+            </a>
+          </aside>
+
+          <!-- Carousel -->
+          <article id="hero-carousel" tabindex="-1" class="relative isolate flex h-[500px] min-w-0 flex-col overflow-hidden bg-navy text-white outline-none sm:h-[460px] lg:h-[470px]"></article>
+
+          <!-- Welcome + staff promo cards -->
+          <div class="grid gap-4 sm:grid-cols-2 lg:col-span-2 xl:col-span-1 xl:grid-cols-1 xl:grid-rows-[auto_1fr]">
+            <div class="panel p-5">
+              <div class="flex items-center gap-3">
+                <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-navy text-white"><i data-lucide="building-2" class="h-5 w-5"></i></span>
+                <div class="min-w-0">
+                  <p class="text-[13px] text-ink-soft">Welcome to</p>
+                  <p class="truncate text-[15px] font-bold text-ink">AMK Industrial Trading</p>
+                </div>
+              </div>
+              <p class="mt-3 text-[13px] leading-relaxed text-ink-muted">One vendor for every industrial brand — tell us what you need and get a quote within 24 hours.</p>
+              <div class="mt-4 grid grid-cols-2 gap-2">
+                <button type="button" data-post-requirement class="btn btn-accent btn-sm">Post Need</button>
+                <a href="contact.html#rfq" class="btn btn-outline btn-sm">Get Quote</a>
+              </div>
+            </div>
+            <div id="hero-cards" class="grid gap-4"></div>
+          </div>
+        </div>
+
+        <!-- Sourcing tools -->
+        <div id="hero-sidekick" class="mt-4 grid gap-4 md:grid-cols-3"></div>
+      </div>
+    </section>
+
+    <!-- ================= Source by business segment ================= -->
+    <section class="container-site pt-8">
+      <div class="panel p-4 sm:p-5">
+        <div class="mb-5 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p class="eyebrow">Six business segments</p>
+            <h2 class="section-title mt-1">Source by industry</h2>
+          </div>
+          <a href="segments.html" class="link-more">All segments <i data-lucide="chevron-right" class="h-4 w-4"></i></a>
+        </div>
+        <div id="home-segments" class="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 xl:grid-cols-6"></div>
+      </div>
+    </section>
+
+    <!-- ================= Staff-managed promo sections (GET /home/) ================= -->
+    <div id="home-sections">
+      <section class="container-site pt-8"><div class="panel p-5"><div class="skeleton mb-5 h-7 w-72"></div><div id="home-skeleton"></div></div></section>
+    </div>
+
+    <!-- ================= Top brands (GET /products/brands/) ================= -->
+    <section id="home-brands-wrap" class="container-site hidden pt-8">
+      <div class="panel p-4 sm:p-5">
+        <div class="mb-5 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p class="eyebrow">Authorised channel</p>
+            <h2 class="section-title mt-1">Top brands we trade</h2>
+          </div>
+          <a href="about.html#partners" class="link-more">Our brands <i data-lucide="chevron-right" class="h-4 w-4"></i></a>
+        </div>
+        <div id="home-brands" class="grid grid-cols-3 gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8"></div>
+      </div>
+    </section>
+
+    <!-- ================= Numbers band ================= -->
+    <section class="container-site pt-8">
+      <div class="grid grid-cols-2 overflow-hidden rounded-2xl bg-navy text-white md:grid-cols-4">
+        <div class="border-b border-r border-white/10 p-6 md:border-b-0"><p class="text-[30px] font-extrabold tracking-tight">15+</p><p class="mt-1 text-[13px] text-white/70">Years in industrial trading</p></div>
+        <div class="border-b border-white/10 p-6 md:border-b-0 md:border-r"><p class="text-[30px] font-extrabold tracking-tight">25,000+</p><p class="mt-1 text-[13px] text-white/70">SKUs across segments</p></div>
+        <div class="border-r border-white/10 p-6"><p class="text-[30px] font-extrabold tracking-tight">30+</p><p class="mt-1 text-[13px] text-white/70">Authorised OEM brands</p></div>
+        <div class="p-6"><p class="text-[30px] font-extrabold tracking-tight text-[#ffb07a]">&lt; 24 hrs</p><p class="mt-1 text-[13px] text-white/70">Average quote turnaround</p></div>
+      </div>
+    </section>
+
+    <!-- ================= Post your buy requirement ================= -->
+    <section class="container-site pt-10">
+      <div class="bg-hero relative overflow-hidden rounded-2xl">
+        <div class="bg-dots pointer-events-none absolute inset-0 opacity-40"></div>
+        <div class="relative grid items-center gap-8 p-6 md:grid-cols-[1fr_1.1fr] md:p-10 lg:p-12">
+          <div class="text-white">
+            <span class="chip bg-accent text-white"><i data-lucide="sparkles" class="h-3.5 w-3.5"></i> Free service</span>
+            <h2 class="mt-4 text-[28px] font-extrabold leading-tight tracking-tight text-white md:text-[36px]">
+              Can't find what you need?<br /><span class="text-[#ffb07a]">We'll source it for you.</span>
+            </h2>
+            <p class="mt-4 max-w-md text-[15px] leading-relaxed text-white/75">
+              Tell us the product, brand or model — even if it isn't in our catalogue. We'll come back with stock, lead times and indicative pricing within 24 hours.
+            </p>
+            <ul class="mt-6 grid gap-2.5 text-[14px] text-white/90 sm:grid-cols-1">
+              <li class="flex items-center gap-2.5"><i data-lucide="circle-check" class="h-4 w-4 shrink-0 text-[#ffb07a]"></i>No account needed — fill once, get a callback</li>
+              <li class="flex items-center gap-2.5"><i data-lucide="circle-check" class="h-4 w-4 shrink-0 text-[#ffb07a]"></i>Verified application engineers respond</li>
+              <li class="flex items-center gap-2.5"><i data-lucide="circle-check" class="h-4 w-4 shrink-0 text-[#ffb07a]"></i>Bulk &amp; project pricing on tap</li>
+            </ul>
+          </div>
+
+          <form id="quick-requirement" class="rounded-2xl bg-white p-5 shadow-pop md:p-7">
+            <div class="flex items-center gap-3">
+              <span class="grid h-11 w-11 place-items-center rounded-full bg-accent-light text-accent"><i data-lucide="clipboard-list" class="h-5 w-5"></i></span>
+              <div>
+                <p class="text-[16px] font-bold text-ink">Request for Quotation</p>
+                <p class="text-[13px] text-ink-soft">Describe in 1–2 lines, we'll handle the rest</p>
+              </div>
+            </div>
+            <label for="quick-text" class="sr-only">Describe your requirement</label>
+            <textarea id="quick-text" rows="4" class="input mt-5" placeholder="e.g. 10 × Schneider MCCB 250A 4P, delivery to Bengaluru next month."></textarea>
+            <div class="mt-4 flex flex-wrap items-center justify-between gap-3">
+              <span class="inline-flex items-center gap-1.5 text-[13px] text-ink-soft"><i data-lucide="clock" class="h-4 w-4"></i>Replies within 24 hrs · Mon – Sat</span>
+              <button type="submit" data-post-requirement data-description-from="#quick-text" class="btn btn-accent">
+                Post Requirement <i data-lucide="arrow-right" class="h-4 w-4"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Final CTA ================= -->
+    <section class="container-site pt-10">
+      <div class="panel flex flex-col items-center justify-between gap-6 px-6 py-10 text-center md:flex-row md:px-10 md:text-left">
+        <div class="max-w-2xl">
+          <p class="eyebrow">Start your project</p>
+          <h2 class="mt-1.5 text-[26px] font-extrabold tracking-tight md:text-[30px]">Ready when your project is.</h2>
+          <p class="mt-2 text-[15px] leading-relaxed text-ink-muted">
+            Send us your spec, BOQ or shortlist. An AMK application engineer will respond with project-scoped pricing within 24 hours.
+          </p>
+        </div>
+        <div class="flex shrink-0 flex-wrap items-center justify-center gap-3">
+          <a href="contact.html#rfq" class="btn btn-accent btn-lg">Request a Quote <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+          <a href="tel:+918089819555" class="btn btn-outline btn-lg"><i data-lucide="phone" class="h-4 w-4"></i> +91 80898 19555</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>AMK.renderBottom()</script>
+  <script src="assets/js/pages/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catalogue · AMK Industrial Trading</title>
+  <meta name="description" content="Browse the AMK catalogue — switchgear, automation, cabling, solar, MRO and smart-factory products from 30+ authorised brands." />
+  <link rel="icon" type="image/png" href="assets/img/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="preconnect" href="https://api.amktrading.com" />
+  <link rel="dns-prefetch" href="https://amk-trading-media.s3.ap-south-1.amazonaws.com" />
+
+  <!-- Tailwind CSS (Play CDN) + shared theme tokens -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="assets/js/tailwind-config.js"></script>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <!-- Icons -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+
+  <!-- Site scripts (order matters) -->
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/enquiry.js"></script>
+</head>
+<body class="flex min-h-screen flex-col">
+  <script>AMK.renderTop()</script>
+
+  <main id="main" class="flex-1">
+    <div id="crumbs"></div>
+    <div class="container-site">
+      <div class="grid gap-5 lg:grid-cols-[260px_1fr]">
+        <aside id="filters-desktop" class="hidden space-y-4 lg:block"></aside>
+
+        <div class="min-w-0">
+          <div class="panel mb-4 flex flex-wrap items-center justify-between gap-3 px-5 py-4">
+            <div class="min-w-0">
+              <h1 id="shop-title" class="text-[22px] font-bold tracking-tight md:text-[26px]">AMK Catalog</h1>
+              <p id="shop-count" class="mt-0.5 text-[13.5px] text-ink-muted">Loading products…</p>
+            </div>
+            <div class="flex w-full items-center gap-2 sm:w-auto">
+              <button type="button" id="open-filters" class="btn btn-outline flex-1 lg:hidden"><i data-lucide="sliders-horizontal" class="h-4 w-4"></i> Filters</button>
+              <label class="flex flex-1 items-center gap-2 sm:flex-none">
+                <span class="hidden text-[13px] text-ink-soft sm:inline">Sort by</span>
+                <select data-sort aria-label="Sort products" class="input !h-10 !rounded-full sm:w-48">
+                  <option value="default">Best match</option>
+                  <option value="new">Newest first</option>
+                  <option value="brand">Brand A–Z</option>
+                  <option value="name">Name A–Z</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div id="active-filters" class="mb-4 hidden flex-wrap items-center gap-2"></div>
+          <div id="shop-grid"></div>
+          <nav id="shop-pages" aria-label="Pagination"></nav>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>AMK.renderBottom()</script>
+  <script src="assets/js/pages/shop.js"></script>
+</body>
+</html>

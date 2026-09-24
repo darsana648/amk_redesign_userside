@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Collection · AMK Industrial Trading</title>
+  <meta name="description" content="A curated AMK product collection." />
+  <link rel="icon" type="image/png" href="assets/img/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="preconnect" href="https://api.amktrading.com" />
+  <link rel="dns-prefetch" href="https://amk-trading-media.s3.ap-south-1.amazonaws.com" />
+
+  <!-- Tailwind CSS (Play CDN) + shared theme tokens -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="assets/js/tailwind-config.js"></script>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <!-- Icons -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+
+  <!-- Site scripts (order matters) -->
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/enquiry.js"></script>
+</head>
+<body class="flex min-h-screen flex-col">
+  <script>AMK.renderTop()</script>
+
+  <main id="main" class="flex-1">
+    <div id="collection-root">
+      <div class="container-site py-3.5"><div class="skeleton h-4 w-48"></div></div>
+      <div class="container-site"><div class="skeleton h-40 w-full !rounded-2xl"></div><div class="panel mt-5 p-5" id="col-skeleton"></div></div>
+    </div>
+  </main>
+
+  <script>AMK.renderBottom()</script>
+  <script>
+    (function () {
+      const AMK = window.AMK;
+      const E = AMK.esc;
+      const I = AMK.i;
+      const slug = AMK.qs("slug") || "";
+      const page = Math.max(1, Number(AMK.qs("page")) || 1);
+      const root = document.getElementById("collection-root");
+      document.getElementById("col-skeleton").innerHTML = AMK.ui.skeletonGrid(10);
+      if (!slug) { root.innerHTML = AMK.ui.notFound("collection"); return; }
+
+      AMK.get(`/collections/${encodeURIComponent(slug)}/?page=${page}`).then((d) => {
+        if (!d || !d.block) { root.innerHTML = AMK.ui.notFound("collection"); return; }
+        const b = d.block;
+        const products = AMK.mapProducts(d.results);
+        const pages = Math.max(1, Math.ceil(d.count / d.page_size));
+        const pageHref = (n) => `collection.html?slug=${encodeURIComponent(slug)}&page=${n}`;
+        document.title = `${b.title || "Collection"} · ${AMK.SITE.fullName}`;
+
+        root.innerHTML = `
+          ${AMK.ui.breadcrumb([{ label: b.title || "Collection" }])}
+          ${AMK.ui.pageHeader({
+            eyebrow: b.eyebrow || "Collection", title: b.title, sub: b.subtitle, image: b.banner_image,
+            meta: `<div class="mt-5"><span class="chip bg-white/10 text-white">${I("package", "h-3.5 w-3.5 text-[#ffb07a]")}${d.count} products</span></div>`,
+          })}
+          <section class="container-site pt-5">
+            <div class="panel p-5">
+              ${AMK.ui.sectionHead({ title: "All products", right: `<span class="text-[13px] text-ink-soft">Page ${page} of ${pages}</span>` })}
+              ${products.length ? AMK.ui.productGrid(products) : AMK.ui.emptyState("No products yet", "No products in this collection yet.")}
+            </div>
+            ${pages > 1 ? `
+              <nav class="panel mt-5 flex items-center justify-center gap-3 px-5 py-4">
+                ${page > 1 ? `<a href="${pageHref(page - 1)}" class="btn btn-outline btn-sm">${I("chevron-left", "h-4 w-4")} Previous</a>` : ""}
+                <span class="text-sm text-ink-soft">Page <b class="text-ink">${page}</b> of <b class="text-ink">${pages}</b></span>
+                ${page < pages ? `<a href="${pageHref(page + 1)}" class="btn btn-accent btn-sm">Next ${I("chevron-right", "h-4 w-4")}</a>` : ""}
+              </nav>` : ""}
+          </section>`;
+      });
+    })();
+  </script>
+</body>
+</html>

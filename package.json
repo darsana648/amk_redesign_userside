@@ -1,0 +1,15 @@
+{
+  "name": "amk-new-design",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AMK Industrial Trading storefront — static HTML + Tailwind CSS redesign",
+  "scripts": {
+    "build": "tailwindcss -i ./src/input.css -o ./assets/css/styles.css --minify",
+    "dev": "tailwindcss -i ./src/input.css -o ./assets/css/styles.css --watch",
+    "serve": "npx --yes serve . -l 5500"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.0",
+    "tailwindcss": "^4.1.0"
+  }
+}

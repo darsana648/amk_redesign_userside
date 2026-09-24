@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Page not found · AMK Industrial Trading</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/png" href="assets/img/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="preconnect" href="https://api.amktrading.com" />
+  <link rel="dns-prefetch" href="https://amk-trading-media.s3.ap-south-1.amazonaws.com" />
+
+  <!-- Tailwind CSS (Play CDN) + shared theme tokens -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="assets/js/tailwind-config.js"></script>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <!-- Icons -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+
+  <!-- Site scripts (order matters) -->
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/enquiry.js"></script>
+</head>
+<body class="flex min-h-screen flex-col">
+  <script>AMK.renderTop()</script>
+
+  <main id="main" class="flex-1">
+    <script>document.currentScript.insertAdjacentHTML("afterend", AMK.ui.notFound("page"))</script>
+  </main>
+
+  <script>AMK.renderBottom()</script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact AMK Industrial Trading · Request a Quote</title>
+  <meta name="description" content="Project enquiries, technical questions, or strategic partnerships — our application engineers respond within 24 hours." />
+  <link rel="icon" type="image/png" href="assets/img/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="preconnect" href="https://api.amktrading.com" />
+  <link rel="dns-prefetch" href="https://amk-trading-media.s3.ap-south-1.amazonaws.com" />
+
+  <!-- Tailwind CSS (Play CDN) + shared theme tokens -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="assets/js/tailwind-config.js"></script>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <!-- Icons -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+
+  <!-- Site scripts (order matters) -->
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/enquiry.js"></script>
+</head>
+<body class="flex min-h-screen flex-col">
+  <script>AMK.renderTop()</script>
+
+  <main id="main" class="flex-1">
+    <script>document.currentScript.insertAdjacentHTML("afterend", AMK.ui.breadcrumb([{ label: "Contact" }]))</script>
+
+    <!-- Hero -->
+    <section class="container-site">
+      <div class="bg-hero relative overflow-hidden rounded-2xl text-white">
+        <div class="bg-dots pointer-events-none absolute inset-0 opacity-40"></div>
+        <div class="relative grid items-end gap-8 px-6 py-12 md:px-12 md:py-14 lg:grid-cols-[1.4fr_1fr]">
+          <div>
+            <span class="chip bg-accent text-white"><i data-lucide="headset" class="h-3.5 w-3.5"></i> Talk to AMK</span>
+            <h1 class="mt-5 text-[32px] font-extrabold leading-[1.1] tracking-tight text-white md:text-[46px]">
+              Let's scope your <span class="text-[#ffb07a]">next project.</span>
+            </h1>
+            <p class="mt-5 max-w-2xl text-[16px] leading-relaxed text-white/80">
+              Bill of materials, panel design, retrofit feasibility or a full-stack rollout — share the brief and an application engineer responds within 24 hours, with stock visibility and indicative landed pricing.
+            </p>
+          </div>
+          <ul class="grid grid-cols-2 gap-2.5 text-[13.5px] font-semibold">
+            <li class="flex items-center gap-2.5 rounded-xl bg-white/10 p-3.5 backdrop-blur"><i data-lucide="shield-check" class="h-4 w-4 shrink-0 text-[#ffb07a]"></i>ISO 9001:2015</li>
+            <li class="flex items-center gap-2.5 rounded-xl bg-white/10 p-3.5 backdrop-blur"><i data-lucide="award" class="h-4 w-4 shrink-0 text-[#ffb07a]"></i>Authorised OEM partner</li>
+            <li class="flex items-center gap-2.5 rounded-xl bg-white/10 p-3.5 backdrop-blur"><i data-lucide="truck" class="h-4 w-4 shrink-0 text-[#ffb07a]"></i>Pan-India delivery</li>
+            <li class="flex items-center gap-2.5 rounded-xl bg-white/10 p-3.5 backdrop-blur"><i data-lucide="circle-check" class="h-4 w-4 shrink-0 text-[#ffb07a]"></i>Genuine, warranty-backed</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Info cards -->
+    <section class="container-site pt-5">
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="panel flex items-start gap-4 p-5"><span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent-light text-accent"><i data-lucide="map-pin" class="h-5 w-5"></i></span>
+          <div class="min-w-0"><p class="text-[12.5px] text-ink-soft">Head office</p><p class="font-semibold">AMK Industrial Trading</p><p class="mt-0.5 text-[13px] text-ink-muted">2nd floor, City Point Building, 69/2100, Jos Junction, Pallimukku, Ernakulam, Kerala 682016</p></div></div>
+        <a href="tel:+918089819555" class="panel flex items-start gap-4 p-5 transition hover:border-accent"><span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent-light text-accent"><i data-lucide="phone" class="h-5 w-5"></i></span>
+          <div><p class="text-[12.5px] text-ink-soft">Sales hotline</p><p class="font-semibold">+91 80898 19555</p><p class="mt-0.5 text-[13px] text-ink-muted">Sales 24/7</p></div></a>
+        <a href="https://wa.me/918089819555" target="_blank" rel="noopener noreferrer" class="panel flex items-start gap-4 p-5 transition hover:border-accent"><span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-trust-light text-trust"><i data-lucide="message-square" class="h-5 w-5"></i></span>
+          <div><p class="text-[12.5px] text-ink-soft">WhatsApp</p><p class="font-semibold">+91 80898 19555</p><p class="mt-0.5 text-[13px] text-ink-muted">Chat with sales</p></div></a>
+        <a href="mailto:sales@amkindia.com" class="panel flex items-start gap-4 p-5 transition hover:border-accent"><span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand-light text-brand"><i data-lucide="mail" class="h-5 w-5"></i></span>
+          <div><p class="text-[12.5px] text-ink-soft">Sales email</p><p class="font-semibold">sales@amkindia.com</p><p class="mt-0.5 text-[13px] text-ink-muted">Quotes &amp; orders — replies within 24 hours</p></div></a>
+        <a href="mailto:info@amkindia.com" class="panel flex items-start gap-4 p-5 transition hover:border-accent"><span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand-light text-brand"><i data-lucide="mail" class="h-5 w-5"></i></span>
+          <div><p class="text-[12.5px] text-ink-soft">General email</p><p class="font-semibold">info@amkindia.com</p><p class="mt-0.5 text-[13px] text-ink-muted">General enquiries</p></div></a>
+        <div class="panel flex items-start gap-4 p-5"><span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-navy-50 text-navy"><i data-lucide="clock" class="h-5 w-5"></i></span>
+          <div><p class="text-[12.5px] text-ink-soft">Quote turnaround</p><p class="font-semibold">&lt; 24 hrs</p><p class="mt-0.5 text-[13px] text-ink-muted">Application engineers on standby</p></div></div>
+      </div>
+    </section>
+
+    <!-- Channels + RFQ -->
+    <section class="container-site pt-10">
+      <div class="grid gap-6 lg:grid-cols-[1fr_1.15fr]">
+        <div>
+          <p class="eyebrow">Talk to the right team</p>
+          <h2 class="section-title mt-1">Three channels, one inbox.</h2>
+          <p class="mt-2 text-[15px] leading-relaxed text-ink-muted">Pick the route that fits — every enquiry is read by a human application engineer.</p>
+          <div class="mt-6 space-y-3">
+            <a href="#rfq" class="card card-hover group flex items-start gap-4 p-5">
+              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-navy text-white group-hover:bg-accent"><i data-lucide="message-square" class="h-5 w-5"></i></span>
+              <div><h3 class="text-[16px] font-bold">Project enquiries</h3><p class="mt-1 text-[14px] text-ink-muted">Bill of materials, tendering, sizing assistance and on-site walk-throughs.</p><span class="link-more mt-2 !text-accent">Send RFQ <i data-lucide="chevron-right" class="h-4 w-4"></i></span></div>
+            </a>
+            <a href="mailto:sales@amkindia.com" class="card card-hover group flex items-start gap-4 p-5">
+              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-navy text-white group-hover:bg-accent"><i data-lucide="headphones" class="h-5 w-5"></i></span>
+              <div><h3 class="text-[16px] font-bold">After-sales &amp; technical</h3><p class="mt-1 text-[14px] text-ink-muted">Warranty claims, replacement parts and engineering troubleshooting.</p><span class="link-more mt-2 !text-accent">Reach support <i data-lucide="chevron-right" class="h-4 w-4"></i></span></div>
+            </a>
+            <a href="mailto:sales@amkindia.com" class="card card-hover group flex items-start gap-4 p-5">
+              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-navy text-white group-hover:bg-accent"><i data-lucide="building-2" class="h-5 w-5"></i></span>
+              <div><h3 class="text-[16px] font-bold">Channel &amp; partners</h3><p class="mt-1 text-[14px] text-ink-muted">OEM, dealer and channel-partner programmes for the trading network.</p><span class="link-more mt-2 !text-accent">Talk to channel <i data-lucide="chevron-right" class="h-4 w-4"></i></span></div>
+            </a>
+          </div>
+        </div>
+
+        <form id="rfq" class="panel scroll-mt-20 p-6 shadow-lift md:p-8">
+          <div class="flex items-start justify-between gap-3 border-b border-line pb-5">
+            <div class="flex items-center gap-3">
+              <span class="grid h-11 w-11 place-items-center rounded-full bg-accent-light text-accent"><i data-lucide="file-text" class="h-5 w-5"></i></span>
+              <div>
+                <h3 class="text-[19px] font-bold">Request for Quotation</h3>
+                <p class="text-[13px] text-ink-soft">Send us your brief</p>
+              </div>
+            </div>
+            <span class="chip shrink-0 bg-trust-light text-trust"><i data-lucide="clock" class="h-3.5 w-3.5"></i>24-hr reply</span>
+          </div>
+          <div class="mt-5 grid gap-4">
+            <div class="grid gap-3 sm:grid-cols-2">
+              <label class="block"><span class="field-label">First name</span><input name="firstName" type="text" placeholder="First name" class="input" /></label>
+              <label class="block"><span class="field-label">Last name</span><input name="lastName" type="text" placeholder="Last name" class="input" /></label>
+            </div>
+            <label class="block"><span class="field-label">Company</span><input name="company" type="text" placeholder="Company" class="input" /></label>
+            <div class="grid gap-3 sm:grid-cols-2">
+              <label class="block"><span class="field-label">Work email</span><input name="email" type="email" placeholder="Work email" class="input" /></label>
+              <label class="block"><span class="field-label">Phone</span><input name="phone" type="text" placeholder="Phone" class="input" /></label>
+            </div>
+            <label class="block"><span class="field-label">Segment of interest</span>
+              <select name="segment" id="rfq-segment" class="input"><option value="" disabled selected>Choose a segment…</option></select>
+            </label>
+            <label class="block"><span class="field-label">Project requirements</span>
+              <textarea name="message" rows="5" placeholder="Tell us about the project — application, BOM, target dates." class="input"></textarea>
+            </label>
+            <label class="flex items-start gap-2.5 text-[13px] text-ink-muted">
+              <input type="checkbox" class="mt-0.5 h-4 w-4 rounded accent-[#ff6a00]" />
+              I agree to be contacted by the AMK sales team regarding this enquiry.
+            </label>
+            <button type="submit" class="btn btn-accent btn-lg w-full">Submit RFQ <i data-lucide="arrow-right" class="h-4 w-4"></i></button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script>AMK.renderBottom()</script>
+  <script>
+    document.getElementById("rfq-segment").insertAdjacentHTML("beforeend",
+      AMK.SEGMENTS.map((s) => `<option value="${s.id}">${AMK.esc(s.short)}</option>`).join(""));
+  </script>
+</body>
+</html>
