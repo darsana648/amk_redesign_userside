@@ -415,3 +415,18 @@ main img:not([class*="rounded"]):not(.hero-img):not([class*="absolute"]) { borde
 
   #amk-menu-btn { border-radius: 10px; }
 }
+
+/* ---------- Ad popup (staff-managed) ----------
+   Fades the backdrop in; the card slides up as a bottom sheet on phones and
+   scales in as a centred dialog from 640px up. */
+.amk-popup .amk-popup-backdrop { opacity: 0; transition: opacity .25s ease; }
+.amk-popup .amk-popup-card { transform: translateY(100%); transition: transform .32s cubic-bezier(.2,.8,.2,1), opacity .25s ease; max-height: 92vh; overflow-y: auto; }
+.amk-popup.is-open .amk-popup-backdrop { opacity: 1; }
+.amk-popup.is-open .amk-popup-card { transform: none; }
+@media (min-width: 640px) {
+  .amk-popup .amk-popup-card { transform: translateY(12px) scale(.97); opacity: 0; }
+  .amk-popup.is-open .amk-popup-card { transform: none; opacity: 1; }
+}
+@media (max-width: 639px) {
+  .amk-popup .amk-popup-card { border-radius: 18px 18px 0 0 !important; padding-bottom: env(safe-area-inset-bottom, 0); }
+}

@@ -471,27 +471,68 @@
     });
   }
 
+  /* Classy ad popup: centred two-column card on desktop (photo | content),
+     bottom sheet that slides up on phones. Same data, trigger and frequency
+     rules as before — only the presentation changed. */
   function renderPopup(p) {
     if (document.querySelector("[role=dialog][aria-modal=true]")) return; // never stack over a form
+    const hasImg = !!p.image;
     const el = document.createElement("div");
-    el.className = "fixed inset-0 z-[150] flex items-center justify-center bg-navy-950/55 p-4";
+    el.className = "amk-popup fixed inset-0 z-[150] flex items-end justify-center sm:items-center sm:p-6";
+    el.setAttribute("role", "dialog");
+    el.setAttribute("aria-modal", "true");
+    el.setAttribute("aria-labelledby", "amk-popup-title");
     el.innerHTML = `
-      <div class="fade-up relative w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl" data-card>
-        ${p.dismissable ? `<button type="button" data-x aria-label="Close" class="absolute right-3 top-3 z-10 grid h-8 w-8 place-items-center rounded-full bg-black/45 text-white hover:bg-black/65">${I("x", "h-4 w-4")}</button>` : ""}
-        ${p.image ? `<img src="${E(p.image)}" alt="${E(p.title)}" class="h-48 w-full object-cover" />` : ""}
-        <div class="p-6">
-          <h3 class="text-xl font-bold">${E(p.title)}</h3>
-          ${p.subtitle ? `<p class="mt-1.5 text-[14.5px] text-ink-muted">${E(p.subtitle)}</p>` : ""}
-          ${p.body ? `<p class="mt-2 text-sm text-ink-muted">${E(p.body)}</p>` : ""}
-          ${p.cta_label ? `<a href="${AMK.url(p.link || "#")}" data-x class="btn btn-accent mt-5">${E(p.cta_label)} ${I("arrow-right", "h-4 w-4")}</a>` : ""}
+      <div class="amk-popup-backdrop absolute inset-0 bg-navy-950/60 backdrop-blur-[3px]"></div>
+      <div data-card tabindex="-1" class="amk-popup-card relative outline-none w-full overflow-hidden rounded-t-2xl bg-white shadow-[0_30px_80px_-20px_rgba(6,13,31,.55)] sm:rounded-2xl ${hasImg ? "sm:grid sm:max-w-[760px] sm:grid-cols-[46%_54%]" : "sm:max-w-[460px]"}">
+        <span class="absolute left-1/2 top-2 z-20 h-1 w-10 -translate-x-1/2 rounded-full bg-white/80 sm:hidden ${hasImg ? "" : "!bg-line-strong"}"></span>
+        ${p.dismissable ? `<button type="button" data-x aria-label="Close" class="absolute right-3 top-3 z-20 grid h-9 w-9 place-items-center rounded-full bg-white/95 text-ink shadow-md transition hover:bg-white hover:text-accent sm:bg-canvas sm:shadow-none sm:hover:bg-line">${I("x", "h-4 w-4")}</button>` : ""}
+        ${hasImg ? `
+        <div class="relative h-44 sm:h-auto sm:min-h-[380px]">
+          <img src="${E(p.image)}" alt="" class="absolute inset-0 h-full w-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-transparent to-transparent sm:bg-gradient-to-r sm:from-transparent sm:via-transparent sm:to-navy-950/10"></div>
+          <span class="absolute bottom-3 left-4 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-2.5 py-1 text-[11px] font-semibold text-navy shadow sm:bottom-auto sm:top-4">
+            <img src="assets/img/logo.png" alt="" class="h-3.5 w-auto" /> Authorised OEM channel
+          </span>
+        </div>` : ""}
+        <div class="flex flex-col px-6 pb-6 pt-5 sm:px-8 sm:py-8">
+          <span class="inline-flex w-fit items-center gap-1.5 rounded-full bg-accent-light px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.1em] text-accent">
+            ${I("sparkles", "h-3.5 w-3.5")} Special offer
+          </span>
+          <h3 id="amk-popup-title" class="mt-3 pr-8 text-[22px] font-extrabold leading-tight tracking-tight text-ink sm:text-[26px]">${E(p.title)}</h3>
+          ${p.subtitle ? `<p class="mt-2 text-[15px] leading-relaxed text-ink-muted">${E(p.subtitle)}</p>` : ""}
+          ${p.body ? `<p class="mt-2 text-[14px] leading-relaxed text-ink-muted">${E(p.body)}</p>` : ""}
+          <ul class="mt-5 grid gap-2 border-t border-line pt-4 text-[13px] text-ink-muted">
+            <li class="flex items-center gap-2">${I("badge-check", "h-4 w-4 shrink-0 text-trust")} Genuine, warranty-backed OEM stock</li>
+            <li class="flex items-center gap-2">${I("clock", "h-4 w-4 shrink-0 text-trust")} Quotes within 24 hours</li>
+            <li class="flex items-center gap-2">${I("truck", "h-4 w-4 shrink-0 text-trust")} Pan-India delivery</li>
+          </ul>
+          <div class="mt-auto pt-6">
+            ${p.cta_label ? `<a href="${AMK.url(p.link || "#")}" data-x data-cta class="btn btn-accent btn-lg w-full">${E(p.cta_label)} ${I("arrow-right", "h-4 w-4")}</a>` : ""}
+            ${p.dismissable ? `<button type="button" data-x class="mt-2 w-full py-2 text-[13px] font-medium text-ink-soft transition hover:text-ink">Maybe later</button>` : ""}
+          </div>
         </div>
       </div>`;
-    const close = () => el.remove();
+
+    const prevOverflow = document.body.style.overflow;
+    let closed = false;
+    const close = () => {
+      if (closed) return;
+      closed = true;
+      document.removeEventListener("keydown", onKey);
+      el.classList.remove("is-open");
+      setTimeout(() => { el.remove(); document.body.style.overflow = prevOverflow; }, 260);
+    };
+    const onKey = (e) => { if (e.key === "Escape" && p.dismissable) close(); };
     el.addEventListener("click", (e) => {
       if (e.target.closest("[data-x]")) return close();
       if (!e.target.closest("[data-card]") && p.dismissable) close();
     });
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
     document.body.appendChild(el);
+    requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add("is-open")));
+    el.querySelector("[data-card]").focus({ preventScroll: true });
     if (p.auto_close_seconds) setTimeout(close, p.auto_close_seconds * 1000);
   }
 })();
