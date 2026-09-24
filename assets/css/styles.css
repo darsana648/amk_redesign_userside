@@ -77,7 +77,7 @@ h1, h2, h3, h4 { color: var(--ink); letter-spacing: -0.015em; }
   align-items: center;
   gap: 6px;
   padding: 4px 10px;
-  border-radius: 999px;
+  border-radius: 6px;
   font-size: 0.75rem;
   font-weight: 600;
 }
@@ -101,7 +101,7 @@ h1, h2, h3, h4 { color: var(--ink); letter-spacing: -0.015em; }
   gap: 8px;
   height: 42px;
   padding: 0 20px;
-  border-radius: 999px;
+  border-radius: 8px;
   font-size: 0.875rem;
   font-weight: 600;
   white-space: nowrap;
@@ -202,7 +202,7 @@ select.input {
   padding: 3px 10px;
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 6px;
   color: var(--ink);
   font-size: 0.72rem;
   font-weight: 700;
@@ -227,7 +227,7 @@ select.input {
   display: inline-flex;
   align-items: center;
   padding: 2px 7px;
-  border-radius: 4px;
+  border-radius: 5px;
   font-size: 0.66rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -283,10 +283,6 @@ input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; marg
   }
 }
 
-/* ---------- Square corners everywhere (classic, no rounded radius) ----------
-   One override instead of editing every rounded-* utility; native radio
-   buttons keep their own shape because browsers draw them. */
-*, *::before, *::after { border-radius: 0 !important; }
 
 /* ---------- Home carousel ---------- */
 .hero-img { opacity: 0; transform: scale(1); transition: opacity .6s ease, transform 6s linear; }
@@ -299,4 +295,123 @@ input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; marg
 @media (prefers-reduced-motion: reduce) {
   .hero-img.is-active { transform: none; }
   .hero-bar.is-running { animation-duration: var(--slide-ms, 4500ms) !important; }
+}
+
+/* =========================================================================
+   Phone view (< 640px): white, classic look.
+   Desktop and tablet keep the dark navy & red design. On phones every dark
+   band turns into white with navy text and crimson accents:
+     .bg-hero / .m-light  dark sections  -> white panel
+     .m-stack             image cards    -> photo on top, white text block below
+     #hero-carousel       carousel       -> white Amazon-style hero: photo fading
+                                           into white, dark text below
+   ========================================================================= */
+@media (max-width: 639px) {
+  body { background: #fff; }
+
+  /* ---- Dark sections -> white panels ---- */
+  .bg-hero, .m-light, .m-stack {
+    background: #fff !important;
+    color: var(--ink) !important;
+    border: 1px solid var(--line);
+    box-shadow: 0 1px 2px rgba(10,21,48,.04);
+  }
+  .bg-hero .bg-dots, .m-light .bg-dots { display: none; }
+
+  /* Light text -> dark text (low specificity so the rules below win) */
+  :where(.bg-hero, .m-light, .m-stack) [class*="text-white"] { color: var(--ink-muted) !important; }
+  :where(.bg-hero, .m-light, .m-stack) [class*="text-slate-"] { color: var(--ink-muted) !important; }
+  :where(.bg-hero, .m-light, .m-stack) :is(h1, h2, h3, h4, b, strong, .text-\[30px\]) { color: var(--ink) !important; }
+  :where(.bg-hero, .m-light, .m-stack) [class*="text-[#ff5c6c]"],
+  :where(.bg-hero, .m-light, .m-stack) .eyebrow-light { color: var(--accent) !important; }
+  :where(.bg-hero, .m-light, .m-stack) [class*="bg-white/"] { background: var(--canvas) !important; }
+  :where(.bg-hero, .m-light, .m-stack) [class*="border-white/"] { border-color: var(--line) !important; }
+  :where(.bg-hero, .m-light, .m-stack) .btn-ghost-light { background: #fff; color: var(--ink); border-color: var(--line-strong); }
+  /* Filled chips / icon tiles keep white text */
+  :where(.bg-hero, .m-light, .m-stack) :is(.bg-accent, .bg-navy) { color: #fff !important; }
+  :where(.bg-hero, .m-light, .m-stack) :is(.bg-accent, .bg-navy) * { color: #fff !important; }
+
+  /* Footer: light grey, hairline dividers */
+  footer.m-light { background: var(--canvas) !important; border: 0; border-top: 1px solid var(--line); box-shadow: none; }
+  footer.m-light a:hover { color: var(--accent) !important; }
+
+  /* ---- Image cards -> photo on top, text below ---- */
+  .m-stack { display: flex !important; flex-direction: column; aspect-ratio: auto !important; min-height: 0 !important; height: auto !important; }
+  .m-stack > img { position: static !important; display: block; width: 100%; height: 190px !important; flex-shrink: 0; }
+  .m-stack.m-stack-sm > img { height: 108px !important; }
+  .m-stack > div[class*="bg-gradient"] { display: none !important; }
+  .m-stack > div:last-child { margin-top: 0 !important; padding: 16px 16px 18px !important; justify-content: flex-start; }
+  .m-stack.m-stack-sm > div:last-child { padding: 10px 12px 12px !important; }
+  .m-stack.m-stack-sm > div:last-child > span:first-child { display: none; }   /* icon badge over photo */
+
+  /* ---- Carousel -> white, Amazon-style hero ----
+     Edge-to-edge banner photo that fades into white; eyebrow, headline,
+     text and buttons in dark ink on white underneath. */
+  #hero-carousel {
+    height: 488px !important;
+    margin: -16px -12px 0;              /* cancel the section's top padding and side gutter */
+    width: calc(100% + 24px);
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: #fff !important;
+    color: var(--ink) !important;
+  }
+  #hero-carousel .hero-img { height: 240px !important; bottom: auto !important; transform: none !important; }
+  #hero-carousel > div[class*="bg-[linear-gradient"] { display: none; }
+  #hero-carousel > div[class*="bg-gradient-to-t"] {
+    top: 0; bottom: auto !important; height: 241px !important;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 52%, rgba(255,255,255,.75) 80%, #fff 100%) !important;
+  }
+  #hero-carousel > div.absolute.right-4 { top: 12px; right: 12px; }
+  #hero-carousel > div.absolute.right-4 button { display: none; }     /* swipe / dots instead of arrows */
+  #hero-carousel > div.absolute.right-4 span { margin: 0; padding: 3px 9px; border-radius: 999px; background: rgba(255,255,255,.9); color: var(--ink) !important; font-size: 11.5px; box-shadow: 0 1px 4px rgba(10,21,48,.15); }
+  #hero-carousel > div.absolute.right-4 span b { color: var(--ink) !important; }
+  #hero-carousel [data-copy] { justify-content: flex-start !important; padding: 228px 16px 6px !important; }
+  #hero-carousel [data-copy] p:first-child { color: var(--accent) !important; font-size: 11px !important; }
+  #hero-carousel [data-copy] h1 { color: var(--ink) !important; font-size: 23px !important; line-height: 1.2 !important; margin-top: 8px !important; }
+  #hero-carousel [data-copy] p.mt-3 { color: var(--ink-muted) !important; font-size: 14px !important; -webkit-line-clamp: 3 !important; margin-top: 8px !important; }
+  #hero-carousel [data-copy] .mt-6 { margin-top: 14px !important; gap: 10px !important; flex-wrap: nowrap !important; }
+  #hero-carousel [data-copy] .btn-lg { flex: 1 1 0; min-width: 0; height: 44px; padding: 0 12px; font-size: .85rem; }
+  #hero-carousel [data-copy] .btn-lg svg { display: none; }
+  #hero-carousel [data-copy] .btn-ghost-light { background: #fff; color: var(--ink); border-color: var(--line-strong); }
+  #hero-carousel .hero-dot { height: 3px; width: 16px; border-radius: 2px; }
+  #hero-carousel .hero-dot:not(.bg-accent) { background: var(--line-strong) !important; }
+  #hero-carousel .hero-dot.bg-accent { width: 26px; }
+
+  /* ---- Header chrome ---- */
+  #amk-menu-btn { background: #fff !important; color: var(--ink) !important; border: 1px solid var(--line-strong); }
+}
+
+/* ---------- Rounded corners on every card and image ----------
+   Cards/panels 12px, buttons 8px, inputs 8px. Images inside cards follow the
+   card's corners (overflow: hidden); standalone content images get 10px. */
+.card, .panel { overflow: hidden; }
+.card img, .panel img { border-radius: 8px; }
+.card > a > div > img, .card .aspect-square img { border-radius: 0; }  /* product photo is clipped by the card */
+main img:not([class*="rounded"]):not(.hero-img):not([class*="absolute"]) { border-radius: 10px; }
+
+/* ---------- Phone polish (< 640px): clean, editorial white layout ----------
+   Sections on the home page drop their boxed panel (.m-flat) so content sits
+   directly on white with generous spacing; product cards get a softer frame. */
+@media (max-width: 639px) {
+  .m-flat { border: 0 !important; box-shadow: none !important; background: transparent !important; padding-left: 0 !important; padding-right: 0 !important; overflow: visible; }
+  .m-flat .section-title { font-size: 20px; }
+  main section.container-site + section.container-site { border-top: 1px solid #f0f2f6; }
+
+  .card { border-color: #edf0f5; box-shadow: 0 2px 10px -6px rgba(10,21,48,.18); border-radius: 14px; }
+  .card .text-trust { white-space: nowrap; }
+  .card [title$="out of 5"] > span:last-child { display: none; }   /* hide review count; keeps "In Stock" on one line */
+  .card .btn-sm { height: 36px; }
+
+  .panel { border-radius: 14px; }
+  .bg-hero, .m-light, .m-stack { border-radius: 14px !important; }
+  footer.m-light { border-radius: 0 !important; }
+  .btn { border-radius: 10px; }
+
+
+  #home-brands { background: #fff; border-color: #edf0f5; }
+  #home-brands > :nth-child(n+16) { display: none; }   /* 5 full rows of 3 */
+
+  #amk-menu-btn { border-radius: 10px; }
 }

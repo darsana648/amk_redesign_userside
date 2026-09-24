@@ -47,7 +47,7 @@
       root.innerHTML = `
         ${AMK.ui.breadcrumb([{ label: "Segments", href: "/segments" }, { label: seg.name }])}
         <section class="container-site">
-          <div class="relative overflow-hidden rounded-2xl bg-navy">
+          <div class="m-stack relative overflow-hidden rounded-2xl bg-navy">
             <img src="${AMK.img(seg.image, 1600)}" alt="${E(seg.name)}" class="absolute inset-0 h-full w-full object-cover" fetchpriority="high" />
             <div class="absolute inset-0 bg-gradient-to-r from-[#060d1f]/95 via-[#0a1530]/70 to-transparent"></div>
             <div class="relative px-6 py-12 text-white md:px-12 md:py-16">

@@ -174,7 +174,7 @@
     paint();
 
     document.getElementById("hero-cards").innerHTML = cards.map((c) => `
-      <a href="${AMK.url(c.link || "/shop")}" class="group relative flex min-h-[150px] overflow-hidden rounded-2xl bg-navy text-white">
+      <a href="${AMK.url(c.link || "/shop")}" class="m-stack group relative flex min-h-[150px] overflow-hidden rounded-2xl bg-navy text-white">
         ${c.image ? `<img src="${E(AMK.img(c.image, 600))}" alt="" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />` : ""}
         <div class="absolute inset-0 bg-gradient-to-t from-[#060d1f]/90 via-[#060d1f]/45 to-transparent"></div>
         <div class="relative mt-auto p-4">
@@ -193,7 +193,7 @@
   function bannerSection(s) {
     const href = AMK.url(s.link || s.view_all_href || "#");
     return `<section class="container-site pt-8">
-      <a href="${href}" class="group relative block aspect-[3/2] overflow-hidden rounded-2xl bg-navy sm:aspect-[21/9] lg:aspect-[24/7]">
+      <a href="${href}" class="m-stack group relative block aspect-[3/2] overflow-hidden rounded-2xl bg-navy sm:aspect-[21/9] lg:aspect-[24/7]">
         ${s.banner_image ? `<img src="${E(AMK.img(s.banner_image, 1600))}" alt="${E(s.title)}" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />` : ""}
         <div class="absolute inset-0 bg-gradient-to-r from-[#060d1f]/90 via-[#0a1530]/55 to-transparent"></div>
         <div class="relative flex h-full max-w-xl flex-col justify-center gap-2 p-6 text-white md:p-12">
@@ -209,7 +209,7 @@
   function gridSection(s) {
     const products = AMK.mapProducts(s.products);
     return `<section class="container-site pt-8">
-      <div class="panel p-4 sm:p-5">
+      <div class="m-flat panel p-4 sm:p-5">
         ${AMK.ui.sectionHead({
           eyebrow: s.eyebrow, title: s.title, sub: s.subtitle,
           right: `<a href="${AMK.url(s.view_all_href || "/shop")}" class="link-more">View more ${I("chevron-right", "h-4 w-4")}</a>`,
@@ -221,7 +221,7 @@
 
   /* ---------------- Source by industry (segments) ---------------- */
   document.getElementById("home-segments").innerHTML = AMK.SEGMENTS.map((s) => `
-    <a href="${AMK.url(`/segment/${s.slug}`)}" class="group relative flex aspect-[4/5] flex-col overflow-hidden rounded-xl bg-navy">
+    <a href="${AMK.url(`/segment/${s.slug}`)}" class="m-stack m-stack-sm group relative flex aspect-[4/5] flex-col overflow-hidden rounded-xl bg-navy">
       <img src="${E(AMK.img(s.image, 400))}" alt="" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />
       <div class="absolute inset-0 bg-gradient-to-t from-[#060d1f]/95 via-[#060d1f]/40 to-transparent"></div>
       <div class="relative mt-auto p-3.5">

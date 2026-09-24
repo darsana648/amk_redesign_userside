@@ -95,7 +95,7 @@
 
         <form action="shop.html" method="get" role="search" class="relative hidden flex-1 md:block">
           <label for="site-search" class="sr-only">Search the catalogue</label>
-          <div class="flex h-12 items-center rounded-full border-2 border-accent bg-white pl-5 pr-1 transition focus-within:shadow-[0_0_0_4px_rgba(200,16,46,.12)]">
+          <div class="flex h-12 items-center rounded-lg border-2 border-accent bg-white pl-5 pr-1 transition focus-within:shadow-[0_0_0_4px_rgba(200,16,46,.12)]">
             ${I("search", "h-4 w-4 shrink-0 text-ink-soft")}
             <input id="site-search" type="text" name="q" value="${q}" placeholder="What are you looking for? Products, brands, SKU…"
                    class="h-full min-w-0 flex-1 bg-transparent px-3 text-[15px] outline-none placeholder:text-ink-soft" />
@@ -120,7 +120,7 @@
       </div>
 
       <div class="container-site pb-3 md:hidden">
-        <form action="shop.html" method="get" role="search" class="flex h-11 items-center rounded-full border-2 border-accent bg-white pl-4 pr-1">
+        <form action="shop.html" method="get" role="search" class="flex h-11 items-center rounded-lg border-2 border-accent bg-white pl-4 pr-1">
           ${I("search", "h-4 w-4 shrink-0 text-ink-soft")}
           <input type="text" name="q" value="${q}" placeholder="Search products, brands, SKU…" aria-label="Search the catalogue"
                  class="h-full min-w-0 flex-1 bg-transparent px-2.5 text-[15px] outline-none" />
@@ -133,7 +133,7 @@
     <nav id="amk-nav" aria-label="Product categories" class="sticky top-0 z-40 border-y border-line bg-white shadow-[0_4px_12px_-10px_rgba(16,24,40,.35)]">
       <div class="container-site flex h-12 items-center gap-2">
         <button type="button" id="amk-menu-btn" aria-label="All categories" aria-expanded="false"
-                class="inline-flex h-9 shrink-0 items-center gap-2 rounded-full bg-navy px-4 text-[13.5px] font-semibold text-white hover:bg-navy-900">
+                class="inline-flex h-9 shrink-0 items-center gap-2 rounded-lg bg-navy px-4 text-[13.5px] font-semibold text-white hover:bg-navy-900">
           ${I("menu", "h-4 w-4")}<span class="hidden sm:inline">All Categories</span>
         </button>
         <div class="relative min-w-0 flex-1">
@@ -372,7 +372,7 @@
       </div>
     </section>
 
-    <footer class="bg-[#070f24] text-slate-400">
+    <footer class="m-light bg-[#070f24] text-slate-400">
       <div class="container-site grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1.2fr]">
         <div>
           <a href="index.html" class="inline-block rounded-lg bg-white px-3 py-2"><img src="assets/img/logo.png" alt="${E(S.fullName)}" class="h-10 w-auto" loading="lazy" /></a>
@@ -404,18 +404,18 @@
       </div>
     </footer>
 
-    <div id="amk-fab" class="fixed bottom-5 right-4 z-[120] translate-y-6 opacity-0 transition-all duration-500 sm:bottom-6 sm:right-6">
+    <div id="amk-fab" class="fixed bottom-4 right-3 z-[120] translate-y-6 opacity-0 transition-all duration-500 sm:bottom-6 sm:right-6">
       <button type="button" data-post-requirement aria-label="Post a buy requirement"
-              class="group inline-flex items-center gap-2.5 rounded-full bg-accent py-2 pl-2 pr-4 text-white shadow-[0_16px_40px_-12px_rgba(200,16,46,.75)] transition hover:scale-[1.03] hover:bg-accent-dark active:scale-95 sm:pr-5">
-        <span class="relative grid h-9 w-9 place-items-center rounded-full bg-white/20">
-          <span class="absolute inset-0 animate-ping rounded-full bg-white/30"></span>
-          ${I("clipboard-list", "relative h-4 w-4")}
+              class="group inline-flex items-center gap-2 rounded-xl bg-accent py-1.5 pl-1.5 pr-3 text-white sm:gap-2.5 sm:py-2 sm:pl-2 sm:pr-5 shadow-[0_16px_40px_-12px_rgba(200,16,46,.75)] transition hover:scale-[1.03] hover:bg-accent-dark active:scale-95">
+        <span class="relative grid h-7 w-7 place-items-center rounded-lg bg-white/20 sm:h-9 sm:w-9">
+          <span class="absolute inset-0 animate-ping rounded-lg bg-white/30"></span>
+          ${I("clipboard-list", "relative h-3.5 w-3.5 sm:h-4 sm:w-4")}
         </span>
+        <span class="text-[12.5px] font-semibold sm:hidden">Need help?</span>
         <span class="hidden flex-col text-left leading-tight sm:flex">
           <span class="text-[10.5px] font-semibold uppercase tracking-[0.1em] text-white/75">Buy Requirement</span>
           <span class="text-[14px] font-bold">Post your need</span>
         </span>
-        <span class="text-[14px] font-bold sm:hidden">Need help?</span>
       </button>
     </div>`;
 

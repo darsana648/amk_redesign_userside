@@ -59,8 +59,10 @@ tailwind.config = {
         pop: "0 20px 48px -16px rgba(10,21,48,0.35)",
       },
       borderRadius: {
+        md: "6px",
+        lg: "8px",
         xl: "12px",
-        "2xl": "16px",
+        "2xl": "14px",
       },
     },
   },
