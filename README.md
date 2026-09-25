@@ -1,96 +1,84 @@
-# AMK Industrial Trading — new frontend (HTML + Tailwind CSS)
+# AMK Industrial Trading — storefront (Next.js)
 
-A redesign of the storefront currently live at <https://www.amktrading.com/>, styled
-like a global B2B marketplace (in the spirit of Alibaba.com and IndiaMART). The pages, navigation, data sources and enquiry
-workflow are the same as the Next.js site (`../amk-trading-frontend`). Only the
-visual layer has changed.
+The redesigned AMK storefront (dark navy & red, marketplace-style layout, white
+"Amazon-style" phone view) built with **Next.js 16 (App Router), React 19,
+TypeScript and Tailwind CSS 3**. It keeps the pages, routes, data sources and
+enquiry workflow of <https://www.amktrading.com/>.
+
+The earlier plain HTML/JS version of this design is kept in [`static-html/`](static-html/)
+for reference only — it is not part of the Next.js build.
 
 ## Run it
 
-It's plain HTML, so there's no build step. Serve the folder with any static server:
-
 ```bash
-cd amk_new_design
-python -m http.server 5500      # then open http://localhost:5500
-# or: npx serve .
+npm install
+npm run dev        # http://localhost:3000
+npm run build && npm start   # production
 ```
 
-> Opening the files directly with `file://` works too. A server is still better,
-> because some browsers restrict scripts on `file://` pages.
+Node 20.9+ is required (Next.js 16).
 
-## How it maps to the current site
+## Routes
 
-| Current route (Next.js)   | New page                        | Data (same backend)                     |
-|---------------------------|---------------------------------|-----------------------------------------|
-| `/`                       | `index.html`                    | `GET /hero/`, `GET /home/`              |
-| `/shop?q=&sort=`          | `shop.html?q=&sort=`            | `GET /products/`, `/categories/`, `/products/brands/` |
-| `/category/<slug>`        | `category.html?slug=<slug>`     | `GET /categories/<slug>/page/`          |
-| `/product/<slug>`         | `product.html?slug=<slug>`      | `GET /products/<slug>/`, `/spec-form/`  |
-| `/collection/<slug>`      | `collection.html?slug=<slug>`   | `GET /collections/<slug>/?page=`        |
-| `/segments`, `/segment/<slug>` | `segments.html`, `segment.html?slug=` | `GET /categories/<root>/children/`, `/products/?segment=` |
-| `/about`, `/contact`, `/faqs` | `about.html`, `contact.html`, `faqs.html` | static |
-| `/terms`, `/privacy`, `/returns`, `/shipping` | same names `.html` | static |
+| Route | Page | Data (AMK backend) |
+|---|---|---|
+| `/` | Home: category rail, carousel, promo cards, segments, staff-managed sections, brands | `GET /hero/`, `/home/`, `/products/brands/` |
+| `/shop?q=&sort=` | Catalogue with brand filter, sort and pagination | `GET /products/`, `/categories/`, `/products/brands/` |
+| `/category/[slug]` | Brands, sub-categories or leaf stock | `GET /categories/<slug>/page/` |
+| `/product/[slug]` | Gallery, attributes, enquiry / WhatsApp / call, similar products | `GET /products/<slug>/`, `/products/?limit=5` |
+| `/collection/[slug]?page=` | Staff promo collection ("View more") | `GET /collections/<slug>/?page=` |
+| `/segments`, `/segment/[slug]` | Six business segments | `GET /categories/<root>/children/`, `/products/?segment=` |
+| `/about`, `/contact`, `/faqs` | Static content | — |
+| `/terms`, `/privacy`, `/returns`, `/shipping` | Policy pages | — |
 
-Links that the staff portal stores in the old format (for example `/collection/clean-energy`
-on a banner) are rewritten automatically by `AMK.url()` in `assets/js/core.js`.
+The URLs are the same as the live site, so links stored in the staff portal
+(banner links like `/collection/clean-energy`) work unchanged. `/products` redirects to `/shop`.
 
-The workflow is unchanged:
-- **Product enquiry**: every "Request Quote" / "Enquire Now" button opens the same form. It includes the brand multi-select with "Add …", the dynamic spec fields and the 120-character description, and it posts the same payload to `POST /inquiries/`.
-- **Buy requirement**: this covers the home banner, the floating "Post your need" button and the "Can't find…" box on category pages. It posts to `POST /inquiries/` without a product.
-- **WhatsApp / call**: the product page's WhatsApp button sends the product name, SKU and page link.
-- **Popup ads**: these come from `GET /ad-popups/?path=`, with the same trigger and frequency rules.
-- **Category menu**: the navigation bar is built from `GET /categories/tree/`, with nested flyouts on desktop and a drill-down drawer on mobile.
+## Workflow (unchanged)
+
+- **Product enquiry** — every "Request Quote" / "Enquire Now" opens the enquiry form with the
+  brand multi-select ("Add …" for unlisted brands), the product's dynamic spec fields
+  (`GET /products/<slug>/spec-form/`) and the 120-character description → `POST /inquiries/`.
+- **Buy requirement** — header "Post Requirement", the floating "Post your need / Need help?"
+  button, the home "Request for Quotation" box and the "Can't find…" boxes → `POST /inquiries/`.
+- **WhatsApp / call** — the product page's WhatsApp button sends the product name, SKU and page link.
+- **Popup ads** — `GET /ad-popups/?path=` with the same trigger and frequency rules.
+- **Category menu** — built from `GET /categories/tree/`: cascading flyouts on desktop,
+  drill-down drawer on phones.
+
+## How data flows
+
+- Pages are **server components**; they call the backend on the server (`lib/api.ts`), so the
+  backend's CORS policy never gets in the way — the site works on `localhost` against live data.
+- Browser-side calls (brand list, spec forms, popups, enquiry submissions) go through the proxy
+  route `app/api/amk/[...path]/route.ts`, which only forwards the endpoints the storefront uses.
+- If the server can't reach the API, read-only data falls back to `lib/data/snapshot.json`
+  (refresh it with `npm run snapshot`). Enquiries are never faked — they always go to the live API.
+
+## Configuration
+
+| What | Where |
+|---|---|
+| API base URL | `AMK_API_BASE` env var (default `https://api.amktrading.com/api`) |
+| Disable snapshot fallback | `AMK_SNAPSHOT_FALLBACK=false` |
+| Contacts, segments, built-in carousel slides | `lib/site.ts` |
+| Colours, fonts, shadows, radii | `tailwind.config.ts` |
+| Component classes, phone "white" layout, carousel & popup styles | `app/globals.css` |
+| Policy page & FAQ text | `lib/legal.ts` |
 
 ## Project layout
 
 ```
-index.html … 404.html        one file per page
-assets/css/styles.css        shared component classes (buttons, inputs, cards, type)
-assets/js/tailwind-config.js design tokens: colours, fonts, shadows
-assets/js/config.js          API base URL, contact details, six segments
-assets/js/core.js            routing, API client + snapshot fallback, product card, breadcrumb…
-assets/js/layout.js          top bar, header, category nav, footer, FAB, popups
-assets/js/enquiry.js         enquiry modals, brand picker, spec fields, WhatsApp
-assets/js/pages/*.js         page scripts (home, shop, category, product, legal/FAQ)
-assets/data/snapshot.js      offline copy of the catalogue (fallback only)
-tools/snapshot.py            refreshes snapshot.js from the live API
+app/                    routes (App Router) + api/amk proxy + globals.css
+components/layout/      header, search, category menu + drawer, footer, floating button, popups
+components/enquiry/     enquiry provider/modal, forms, brand picker, spec fields, buttons
+components/home/        hero carousel
+components/shop/        catalogue client (filters, sort, pagination), "show more" grid
+components/product/     product gallery
+components/ui/          product card, grids, breadcrumb, headings, brand slider, empty/404 states
+components/legal/       policy page + FAQ building blocks
+lib/                    site config, API client, snapshot resolver, types, helpers, legal text
+public/img/logo.png     logo
+scripts/snapshot.mjs    refreshes lib/data/snapshot.json
+static-html/            previous static HTML version (reference only)
 ```
-
-## Configuration
-
-- **API**: set `API_BASE` in `assets/js/config.js`. You can also define `window.AMK_API_BASE`
-  before `config.js` loads.
-- **Contacts and segments**: these are in `AMK.SITE` and `AMK.SEGMENTS` in the same file.
-- **Colours and fonts**: these are in `assets/js/tailwind-config.js` and `assets/css/styles.css`.
-  The "dark navy & red" palette is very dark navy `#0a1530` for the header bars, carousel and
-  footer, crimson `#c8102e` (with white text) for every button, badge and accent, a brighter red
-  `#ff5c6c` for highlights on dark backgrounds, royal blue `#2a4f9a` for links and forest green
-  `#1f7a52`, with white cards on a cool neutral `#f4f6fa` background. The red matches the AMK
-  logo. All text uses Inter.
-  Earlier palettes, in case you want one back: "navy & brass" (navy `#0b2b5c`, brass `#8c6a2f`,
-  champagne `#e3c58f`, ivory `#f5f3ee`), "burgundy & charcoal" (charcoal `#1c1f26`,
-  burgundy `#7b1e2c`, old gold `#d8b27a`, teal `#245c63`, cream `#f6f4f1`), "emerald & gold"
-  (emerald `#0e3a2f`, gold `#9a7430`, champagne `#d9b66f`, off-white `#f7f5f0`) and
-  "midnight & apricot" (midnight `#161e31`, apricot `#f8b179` with navy text, deep apricot
-  `#a8531f`, neutral `#f6f5f2`).
-
-### CORS and the offline snapshot
-
-`api.amktrading.com` only accepts browser requests from `https://www.amktrading.com`.
-On `localhost` the live API is therefore blocked, and read-only pages fall back to
-`assets/data/snapshot.js` automatically. Enquiry submissions still go to the live API, so
-they fail locally with "Could not submit right now". They work once the site is served from
-the production domain, or after the backend adds your preview origin to its CORS allow-list.
-To refresh the snapshot, run `python tools/snapshot.py`.
-
-## Going to production
-
-The Tailwind Play CDN is convenient but not intended for production. To compile a static CSS
-file, run the following. It uses the same theme values as `tailwind-config.js`:
-
-```bash
-npx tailwindcss@3 -c tailwind.config.cjs -o assets/css/tailwind.css --minify
-```
-
-Then replace the two Tailwind `<script>` tags in each page's `<head>` with
-`<link rel="stylesheet" href="assets/css/tailwind.css">`.
